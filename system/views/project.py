@@ -3,11 +3,71 @@ from django.http import JsonResponse
 from rest_framework.decorators import api_view
 
 from system.models import Approval, Project, Employee, build_fail_response, build_success_response
-from system.serializers import ApprovalSerializer
+from system.serializers import ApprovalSerializer, ProjectSerializer
 
 import json
 
 NO_DATA_HASH = ''.join(["0" for i in range(128)])
+
+@api_view(["GET"])
+def get_all_projects(request):
+    projects = Project.objects.all()
+    serializer = ProjectSerializer(projects, many = True)
+
+    response = build_success_response(serializer.data)
+    return JsonResponse(response.serialize(), safe = False)
+
+"""
+Example request:
+{
+    "title": "Ultimate Scholarship"
+}
+"""
+@api_view(["POST"])
+def add_new_project(request):
+    data = request.data
+    project = Project(
+        title = data["title"],
+        checklist_mask = 0,
+        head_hash = NO_DATA_HASH,
+        tail_hash = NO_DATA_HASH,
+    )
+    project.save()
+    serializer = ProjectSerializer(project)
+
+    response = build_success_response(serializer.data)
+    return JsonResponse(response.serialize(), safe = False)
+
+@api_view(["GET"])
+def get_project(request, id):
+    id = int(id)
+
+    project = Project.objects.get(id = id)
+    serializer = ProjectSerializer(project)
+
+    response = build_success_response(serializer.data)
+    return JsonResponse(response.serialize(), safe = False)
+
+@api_view(["PUT"])
+def update_project(request, id):
+    id = int(id)
+
+    project = Project.objects.get(id = id)
+    project.title = request.data["title"]
+    project.save()
+    serializer = ProjectSerializer(project)
+
+    response = build_success_response(serializer.data)
+    return JsonResponse(response.serialize(), safe = False)
+
+@api_view(["DELETE"])
+def delete_project(request, id):
+    id = int(id)
+
+    Project.objects.filter(id = id).delete()
+
+    response = build_success_response({})
+    return JsonResponse(response.serialize(), safe = False)
 
 """
 Example request:

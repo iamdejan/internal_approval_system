@@ -22,6 +22,13 @@ urlpatterns = [
     path("contracts/<int:id>", smartcontract.get_contract, name = "get_contract"),
     path("contracts/<int:id>/delete", smartcontract.delete_contract, name = "delete_contract"),
 
-    #approve
+    # project
+    path("projects", project.get_all_projects, name = "get_all_projects"),
+    path("projects/add", project.add_new_project, name = "add_new_project"),
+    path("projects/<int:id>", project.get_project, name = "get_project"),
+    path("projects/<int:id>/update", project.update_project, name = "update_project"),
+    path("projects/<int:id>/delete", project.delete_project, name = "delete_project"),
+
+    # approve
     path("projects/<int:project_id>/approve/<int:employee_id>", project.approve, name = "approve"),
 ]

@@ -72,7 +72,6 @@ class Approval(models.Model):
         encrypted_whole_data = SHA512.new(whole_data.encode()).digest()
         return self.hash == encrypted_whole_data
 
-
 class Project(models.Model):
     title = models.CharField(max_length = 250, null = False)
     checklist_mask = models.IntegerField(null = False)
