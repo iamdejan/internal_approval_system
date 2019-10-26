@@ -1,5 +1,5 @@
 from django.urls import path
-from system.views import employeelevel, employee, smartcontract, project
+from system.views import employeelevel, employee, smartcontract, project, approval
 
 urlpatterns = [
     path("levels", employeelevel.levels, name = "levels"),
@@ -31,4 +31,8 @@ urlpatterns = [
 
     # approve
     path("projects/<int:project_id>/approve/<int:employee_id>", project.approve, name = "approve"),
+
+    # approval
+    path("approval/<str:hash>", approval.get_approval, name = "approval.get_approval"),
+    path("approval/<str:hash>/validate", approval.validate, name = "approval.validate"),
 ]

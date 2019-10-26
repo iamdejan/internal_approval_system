@@ -61,7 +61,7 @@ class Approval(models.Model):
         data_hash = SHA512.new(self.data.encode()).digest()
 
         # validate
-        return public_key.verify(data_hash, (self.signature,))
+        return public_key.verify(data_hash, (int(self.signature),))
 
     """
     Used when we want to publish smart contract
@@ -71,7 +71,7 @@ class Approval(models.Model):
         return whole_data
 
     def validate_block(self): # return bool
-        encrypted_whole_data = SHA512.new(self.generate_whole_data().encode()).digest()
+        encrypted_whole_data = SHA512.new(self.generate_whole_data().encode()).hexdigest()
         return self.hash == encrypted_whole_data
 
 class Project(models.Model):

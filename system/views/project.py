@@ -81,6 +81,12 @@ Example request:
 """
 @api_view(["POST"])
 def approve(request, project_id, employee_id):
+    if "timestamp" not in request.data["data"]:
+        response = build_fail_response({
+            "message": "Timestamp should be included!"
+        })
+        return JsonResponse(response.serialize(), safe = False)
+
     id = int(project_id)
     employee_id = int(employee_id)
     employee = Employee.objects.get(id = employee_id)
