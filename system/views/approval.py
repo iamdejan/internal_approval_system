@@ -11,7 +11,7 @@ def get_approval(request, hash):
     serializer = ApprovalSerializer(approval)
 
     response = build_success_response(serializer.data)
-    return JsonResponse(response.serialize, safe = False)
+    return JsonResponse(response.serialize())
 
 @api_view(["GET"])
 def validate(request, hash):
