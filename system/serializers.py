@@ -19,7 +19,7 @@ class EmployeeSerializer(serializers.ModelSerializer):
 class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
-        fields = ["id", "title", "checklist_mask", "head_hash", "tail_hash"]
+        fields = ["id", "title", "checklist_mask", "tail_hash"]
 
 class ApprovalSerializer(serializers.ModelSerializer):
     class Meta:
