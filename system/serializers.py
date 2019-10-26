@@ -24,7 +24,7 @@ class ProjectSerializer(serializers.ModelSerializer):
 class ApprovalSerializer(serializers.ModelSerializer):
     class Meta:
         model = Approval
-        fields = ["hash", "project_id", "employee_id"]
+        fields = ["hash", "project_id", "employee_id", "previous_hash"]
 
 class SmartContractSerializer(serializers.ModelSerializer):
     class Meta:
