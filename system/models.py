@@ -51,8 +51,7 @@ class Approval(models.Model):
         return self.employee.username
 
     def generate_hash(self):
-        whole_data = "%s%s%s%s%s" % (self.project, self.data, self.signature, self.previous_hash, self.employee)
-        self.hash = SHA512.new(whole_data.encode()).hexdigest()
+        self.hash = SHA512.new(self.generate_whole_data().encode()).hexdigest()
 
     def validate_request(self): # return bool
         # import key
