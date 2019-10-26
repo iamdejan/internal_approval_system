@@ -31,5 +31,4 @@ urlpatterns = [
 
     # approve
     path("projects/<int:project_id>/approve/<int:employee_id>", project.approve, name = "approve"),
-    path("projects/<int:project_id>/approvals", project.get_approvals, name="get_approvals")
 ]
