@@ -119,3 +119,13 @@ def approve(request, project_id, employee_id):
         "approval": serializer.data
     })
     return JsonResponse(response.serialize(), safe = False)
+
+@api_view(["GET"])
+def get_approvals(request, project_id):
+    project_id = int(project_id)
+
+    approvals = Approval.objects.filter(project_id = project_id).all()
+    serializer = ApprovalSerializer(approvals, many = True)
+
+    response = build_success_response(serializer.data)
+    return JsonResponse(response.serialize(), safe = False)
