@@ -163,7 +163,9 @@ class EmployeeTestCase(TestCase):
         pass
 
 class ProjectTestCase(TestCase):
+    # TODO
     pass
 
 class SmartContractTestCase(TestCase):
+    # TODO
     pass
