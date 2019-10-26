@@ -67,9 +67,12 @@ class Approval(models.Model):
     """
     Used when we want to publish smart contract
     """
-    def validate_block(self): # return bool
+    def generate_whole_data(self):
         whole_data = "%s%s%s%s%s" % (self.project, self.data, self.signature, self.previous_hash, self.employee)
-        encrypted_whole_data = SHA512.new(whole_data.encode()).digest()
+        return whole_data
+
+    def validate_block(self): # return bool
+        encrypted_whole_data = SHA512.new(self.generate_whole_data().encode()).digest()
         return self.hash == encrypted_whole_data
 
 class Project(models.Model):
