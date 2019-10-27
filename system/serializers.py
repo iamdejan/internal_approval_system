@@ -14,7 +14,7 @@ class EmployeeLevelSerializer(serializers.ModelSerializer):
 class EmployeeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Employee
-        fields = ["id", "first_name", "last_name", "level"]
+        fields = ["id", "first_name", "last_name", "level_id"]
 
 class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
