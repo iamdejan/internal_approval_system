@@ -118,7 +118,7 @@ def approve(request, project_id, employee_id):
     project.set_checklist_mask(employee.level_id)
     project.save()
 
-    # TODO: publish message if pass the threshold
+    # TODO: publish message on certain condition
 
     serializer = ApprovalSerializer(approval)
     response = build_success_response({
